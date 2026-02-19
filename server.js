@@ -7,6 +7,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const fs = require('fs');
 const { google } = require('googleapis');
 
 const app = express();
@@ -25,7 +26,6 @@ const classId = `${issuerId}.student_card_class`;
  * Create Google Wallet credentials
  */
 function getCredentials() {
-  const fs = require('fs');
   const credentialsPath = path.resolve(process.env.GOOGLE_APPLICATION_CREDENTIALS);
   
   if (!fs.existsSync(credentialsPath)) {
