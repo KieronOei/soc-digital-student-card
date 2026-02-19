@@ -9,9 +9,19 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
 const { google } = require('googleapis');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Rate limiting configuration
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // Middleware
 app.use(bodyParser.json());
@@ -169,7 +179,7 @@ app.get('/', (req, res) => {
 });
 
 // Create student pass
-app.post('/api/create-pass', async (req, res) => {
+app.post('/api/create-pass', apiLimiter, async (req, res) => {
   try {
     const { studentName, studentId, course, year } = req.body;
 
