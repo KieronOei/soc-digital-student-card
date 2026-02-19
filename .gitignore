@@ -31,3 +31,6 @@ build/
 # Temporary files
 tmp/
 temp/
+
+# Local security state
+data/pass-ownership.json

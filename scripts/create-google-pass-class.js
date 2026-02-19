@@ -3,30 +3,32 @@
  * This class defines the template for student cards
  */
 
-require('dotenv').config();
-const fs = require('fs');
-const path = require('path');
-const { google } = require('googleapis');
+require("dotenv").config();
+const fs = require("fs");
+const path = require("path");
+const { google } = require("googleapis");
 
 // Configuration
 const issuerId = process.env.GOOGLE_WALLET_ISSUER_ID;
-const classId = `${issuerId}.student_card_class`;
+const classId = `${issuerId}.nus_ecard_demo_class`;
+const walletObjectsBaseUrl =
+  "https://walletobjects.googleapis.com/walletobjects/v1";
 
 /**
- * Create Google Wallet credentials
+ * Create Wallet HTTP client
  */
-function getCredentials() {
-  const credentialsPath = path.resolve(process.env.GOOGLE_APPLICATION_CREDENTIALS);
-  
+function getWalletHttpClient() {
+  const credentialsPath = path.resolve(
+    process.env.GOOGLE_APPLICATION_CREDENTIALS,
+  );
+
   if (!fs.existsSync(credentialsPath)) {
     throw new Error(`Credentials file not found at: ${credentialsPath}`);
   }
-  
-  const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
-  return new google.auth.JWT({
-    email: credentials.client_email,
-    key: credentials.private_key,
-    scopes: ['https://www.googleapis.com/auth/wallet_object.issuer'],
+
+  return new google.auth.GoogleAuth({
+    keyFile: credentialsPath,
+    scopes: ["https://www.googleapis.com/auth/wallet_object.issuer"],
   });
 }
 
@@ -34,29 +36,17 @@ function getCredentials() {
  * Create a generic pass class for student cards
  */
 async function createPassClass() {
-  const auth = getCredentials();
-  const walletobjects = google.walletobjects({
-    version: 'v1',
-    auth: auth,
-  });
+  const httpClient = getWalletHttpClient();
 
   const genericClass = {
-    id: classId,
+    id: `${classId}`,
+    enableSmartTap: true,
     classTemplateInfo: {
       cardTemplateOverride: {
         cardRowTemplateInfos: [
           {
-            twoItems: {
+            threeItems: {
               startItem: {
-                firstValue: {
-                  fields: [
-                    {
-                      fieldPath: "object.textModulesData['student_name']",
-                    },
-                  ],
-                },
-              },
-              endItem: {
                 firstValue: {
                   fields: [
                     {
@@ -65,15 +55,11 @@ async function createPassClass() {
                   ],
                 },
               },
-            },
-          },
-          {
-            twoItems: {
-              startItem: {
+              middleItem: {
                 firstValue: {
                   fields: [
                     {
-                      fieldPath: "object.textModulesData['course']",
+                      fieldPath: "object.textModulesData['career']",
                     },
                   ],
                 },
@@ -82,7 +68,7 @@ async function createPassClass() {
                 firstValue: {
                   fields: [
                     {
-                      fieldPath: "object.textModulesData['year']",
+                      fieldPath: "object.textModulesData['admit_term']",
                     },
                   ],
                 },
@@ -96,26 +82,35 @@ async function createPassClass() {
 
   try {
     // Try to get the class first
-    const response = await walletobjects.genericclass.get({
-      resourceId: classId,
+    const response = await httpClient.request({
+      url: `${walletObjectsBaseUrl}/genericClass/${classId}`,
+      method: "GET",
     });
-    console.log('Class already exists:', response.data.id);
+    console.log("Class already exists:", response.data.id);
     return response.data;
   } catch (err) {
     if (err.response && err.response.status === 404) {
       // Class doesn't exist, create it
       try {
-        const response = await walletobjects.genericclass.insert({
-          requestBody: genericClass,
+        const response = await httpClient.request({
+          url: `${walletObjectsBaseUrl}/genericClass`,
+          method: "POST",
+          data: genericClass,
         });
-        console.log('Class created successfully:', response.data.id);
+        console.log("Class created successfully:", response.data.id);
         return response.data;
       } catch (insertErr) {
-        console.error('Error creating class:', insertErr.response ? insertErr.response.data : insertErr.message);
+        console.error(
+          "Error creating class:",
+          insertErr.response ? insertErr.response.data : insertErr.message,
+        );
         throw insertErr;
       }
     } else {
-      console.error('Error checking class:', err.response ? err.response.data : err.message);
+      console.error(
+        "Error checking class:",
+        err.response ? err.response.data : err.message,
+      );
       throw err;
     }
   }
@@ -125,11 +120,11 @@ async function createPassClass() {
 if (require.main === module) {
   createPassClass()
     .then(() => {
-      console.log('Google Wallet pass class setup complete!');
+      console.log("Google Wallet pass class setup complete!");
       process.exit(0);
     })
     .catch((error) => {
-      console.error('Failed to create pass class:', error);
+      console.error("Failed to create pass class:", error);
       process.exit(1);
     });
 }

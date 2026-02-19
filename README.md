@@ -14,8 +14,8 @@ Generate digital student cards that can be saved to your device's wallet using G
 This application creates **generic passes** for Google Wallet with the following information:
 - Student Name
 - Student ID
-- Course/Program
-- Academic Year
+- Career
+- Admit Term
 
 ## Setup Instructions
 
@@ -91,8 +91,8 @@ The application will be available at `http://localhost:3000`
 2. Fill in the student information form:
    - Full Name
    - Student ID
-   - Course/Program
-   - Academic Year
+   - Career
+   - Admit Term
 3. Click "Generate Student Card"
 4. Click "Add to Google Wallet" to save the pass
 
@@ -124,8 +124,9 @@ Creates a Google Wallet pass object for a student.
 {
   "studentName": "John Doe",
   "studentId": "S12345678",
-  "course": "Computer Science",
-  "year": "2023-2024"
+   "career": "Undergraduate",
+   "admitTerm": "AY2023/2024 Semester 1",
+   "ownershipToken": "optional-token-for-existing-pass"
 }
 ```
 
@@ -133,8 +134,9 @@ Creates a Google Wallet pass object for a student.
 ```json
 {
   "success": true,
-  "passId": "issuer_id.student_id",
-  "addToWalletLink": "https://pay.google.com/gp/v/save/..."
+   "passId": "issuer_id.550e8400_e29b_41d4_a716_446655440000",
+   "addToWalletLink": "https://pay.google.com/gp/v/save/...",
+   "ownershipToken": "returned-on-first-creation"
 }
 ```
 

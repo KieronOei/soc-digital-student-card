@@ -1,6 +1,21 @@
 // Form submission handler
 document.getElementById('studentForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    const getOwnershipToken = (studentId) => {
+        const normalized = String(studentId || '').trim().toUpperCase();
+        const key = `ownershipToken:${normalized}`;
+        return localStorage.getItem(key);
+    };
+
+    const setOwnershipToken = (studentId, token) => {
+        if (!token) {
+            return;
+        }
+        const normalized = String(studentId || '').trim().toUpperCase();
+        const key = `ownershipToken:${normalized}`;
+        localStorage.setItem(key, token);
+    };
     
     const submitBtn = document.getElementById('submitBtn');
     const resultDiv = document.getElementById('result');
@@ -18,8 +33,9 @@ document.getElementById('studentForm').addEventListener('submit', async (e) => {
     const formData = {
         studentName: document.getElementById('studentName').value,
         studentId: document.getElementById('studentId').value,
-        course: document.getElementById('course').value,
-        year: document.getElementById('year').value,
+        career: document.getElementById('career').value,
+        admitTerm: document.getElementById('admitTerm').value,
+        ownershipToken: getOwnershipToken(document.getElementById('studentId').value),
     };
     
     try {
@@ -35,6 +51,8 @@ document.getElementById('studentForm').addEventListener('submit', async (e) => {
         const data = await response.json();
         
         if (response.ok && data.success) {
+            setOwnershipToken(formData.studentId, data.ownershipToken);
+
             // Show success result
             document.getElementById('passId').textContent = data.passId;
             document.getElementById('googleWalletBtn').href = data.addToWalletLink;

@@ -1,194 +1,200 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 20px;
-    color: #333;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+  color: #333;
 }
 
 .container {
-    max-width: 600px;
-    margin: 0 auto;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 header {
-    text-align: center;
-    color: white;
-    margin-bottom: 30px;
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
 }
 
 header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
 }
 
 header p {
-    font-size: 1.1rem;
-    opacity: 0.9;
+  font-size: 1.1rem;
+  opacity: 0.9;
 }
 
 .card,
 .result-card,
 .error-card {
-    background: white;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
 }
 
 .card h2,
 .result-card h2,
 .error-card h2 {
-    margin-bottom: 20px;
-    color: #333;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #555;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
 }
 
 .form-group input {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #e1e8ed;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border-color 0.3s;
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
 }
 
 .form-group input:focus {
-    outline: none;
-    border-color: #667eea;
+  outline: none;
+  border-color: #667eea;
 }
 
 .btn {
-    padding: 14px 28px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-decoration: none;
-    display: inline-block;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  width: 100%;
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
 
 .btn-primary:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    transform: none;
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .wallet-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
 }
 
-.btn-google {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    border: 2px solid #e1e8ed;
-    padding: 10px;
+.wallet-button-link {
+  display: inline-block;
+  text-decoration: none;
+  transition: transform 0.2s ease;
 }
 
-.btn-google:hover {
-    border-color: #667eea;
-    transform: translateY(-2px);
+.wallet-button-link:hover {
+  transform: scale(1.02);
+}
+
+.wallet-button-img {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  margin: 0 auto;
 }
 
 .btn-apple {
-    background: #000;
-    color: white;
-    width: 100%;
+  background: #000;
+  color: white;
+  width: 100%;
 }
 
 .btn-apple:disabled {
-    background: #ccc;
-    cursor: not-allowed;
+  background: #ccc;
+  cursor: not-allowed;
 }
 
 .coming-soon {
-    text-align: center;
+  text-align: center;
 }
 
 .pass-info {
-    margin-top: 20px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    font-size: 14px;
+  margin-top: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  font-size: 14px;
 }
 
 .pass-info strong {
-    color: #667eea;
+  color: #667eea;
 }
 
 .result-card {
-    display: none;
-    animation: slideIn 0.3s ease-out;
+  display: none;
+  animation: slideIn 0.3s ease-out;
 }
 
 .error-card {
-    display: none;
-    background: #fee;
-    border-left: 4px solid #c00;
+  display: none;
+  background: #fee;
+  border-left: 4px solid #c00;
 }
 
 @keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 footer {
-    text-align: center;
-    color: white;
-    margin-top: 30px;
-    opacity: 0.9;
+  text-align: center;
+  color: white;
+  margin-top: 30px;
+  opacity: 0.9;
 }
 
 @media (max-width: 600px) {
-    header h1 {
-        font-size: 2rem;
-    }
-    
-    .card,
-    .result-card,
-    .error-card {
-        padding: 20px;
-    }
+  header h1 {
+    font-size: 2rem;
+  }
+
+  .card,
+  .result-card,
+  .error-card {
+    padding: 20px;
+  }
 }

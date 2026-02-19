@@ -1,106 +1,113 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Digital Student Card Generator</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>🎓 Digital Student Card Generator</h1>
-            <p>Create your digital student card for Apple & Google Wallet</p>
-        </header>
+      <header>
+        <h1>🎓 Digital Student Card Generator</h1>
+        <p>Create your digital student card for Apple & Google Wallet</p>
+      </header>
 
-        <main>
-            <div class="card">
-                <h2>Enter Your Information</h2>
-                <form id="studentForm">
-                    <div class="form-group">
-                        <label for="studentName">Full Name *</label>
-                        <input 
-                            type="text" 
-                            id="studentName" 
-                            name="studentName" 
-                            required 
-                            placeholder="John Doe"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="studentId">Student ID *</label>
-                        <input 
-                            type="text" 
-                            id="studentId" 
-                            name="studentId" 
-                            required 
-                            placeholder="S12345678"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="course">Course/Program *</label>
-                        <input 
-                            type="text" 
-                            id="course" 
-                            name="course" 
-                            required 
-                            placeholder="Computer Science"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="year">Academic Year *</label>
-                        <input 
-                            type="text" 
-                            id="year" 
-                            name="year" 
-                            required 
-                            placeholder="2023-2024"
-                        >
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" id="submitBtn">
-                        Generate Student Card
-                    </button>
-                </form>
+      <main>
+        <div class="card">
+          <h2>Enter Your Information</h2>
+          <form id="studentForm">
+            <div class="form-group">
+              <label for="studentName">Full Name *</label>
+              <input
+                type="text"
+                id="studentName"
+                name="studentName"
+                required
+                placeholder="John Doe"
+              />
             </div>
 
-            <div id="result" class="result-card" style="display: none;">
-                <h2>✅ Student Card Created!</h2>
-                <p>Your digital student card has been generated successfully.</p>
-                
-                <div class="wallet-buttons">
-                    <a id="googleWalletBtn" href="#" class="btn btn-google" target="_blank">
-                        <img src="https://developers.google.com/static/wallet/images/add-to-google-wallet-button.svg" 
-                             alt="Add to Google Wallet" 
-                             style="height: 50px;">
-                    </a>
-                    
-                    <div class="coming-soon">
-                        <button class="btn btn-apple" disabled>
-                            Add to Apple Wallet (Coming Soon)
-                        </button>
-                    </div>
-                </div>
-
-                <div class="pass-info">
-                    <p><strong>Pass ID:</strong> <span id="passId"></span></p>
-                </div>
+            <div class="form-group">
+              <label for="studentId">Student ID *</label>
+              <input
+                type="text"
+                id="studentId"
+                name="studentId"
+                required
+                placeholder="S12345678"
+              />
             </div>
 
-            <div id="error" class="error-card" style="display: none;">
-                <h2>❌ Error</h2>
-                <p id="errorMessage"></p>
+            <div class="form-group">
+              <label for="career">Career *</label>
+              <input
+                type="text"
+                id="career"
+                name="career"
+                required
+                placeholder="Undergraduate"
+              />
             </div>
-        </main>
 
-        <footer>
-            <p>Secure • Digital</p>
-        </footer>
+            <div class="form-group">
+              <label for="admitTerm">Admit Term *</label>
+              <input
+                type="text"
+                id="admitTerm"
+                name="admitTerm"
+                required
+                placeholder="AY2056/2026 Semester 1"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              Generate Student Card
+            </button>
+          </form>
+        </div>
+
+        <div id="result" class="result-card" style="display: none">
+          <h2>✅ Student Card Created!</h2>
+          <p>Your digital student card has been generated successfully.</p>
+
+          <div class="wallet-buttons">
+            <a
+              id="googleWalletBtn"
+              href="#"
+              class="wallet-button-link"
+              target="_blank"
+            >
+              <img
+                src="wallet-button.png"
+                alt="Add to Google Wallet"
+                class="wallet-button-img"
+              />
+            </a>
+
+            <div class="coming-soon">
+              <button class="btn btn-apple" disabled>
+                Add to Apple Wallet (Coming Soon)
+              </button>
+            </div>
+          </div>
+
+          <div class="pass-info">
+            <p><strong>Pass ID:</strong> <span id="passId"></span></p>
+          </div>
+        </div>
+
+        <div id="error" class="error-card" style="display: none">
+          <h2>❌ Error</h2>
+          <p id="errorMessage"></p>
+        </div>
+      </main>
+
+      <footer>
+        <p>Secure • Digital</p>
+      </footer>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
