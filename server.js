@@ -23,6 +23,14 @@ const apiLimiter = rateLimit({
   legacyHeaders: false,
 });
 
+// More permissive rate limiter for static content
+const staticLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 500, // Higher limit for static content
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -174,7 +182,7 @@ function generateAddToWalletLink(objectId) {
 // Routes
 
 // Home page
-app.get('/', (req, res) => {
+app.get('/', staticLimiter, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
