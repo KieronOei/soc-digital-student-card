@@ -89,14 +89,12 @@ npm start
   - Student ID
   - Course/Program
   - Academic Year
-  - QR Code (contains Student ID)
 
 ## Security Considerations
 
 1. **Environment Variables:** Sensitive credentials stored in .env
 2. **Service Account:** Google Cloud service account for API access
 3. **Unique IDs:** Each pass has a unique identifier
-4. **QR Codes:** Student ID encoded for verification
 
 ## Future Enhancements
 

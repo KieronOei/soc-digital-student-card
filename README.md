@@ -1,12 +1,11 @@
 # Digital Student Card - Wallet Pass Generator
 
-Generate digital student cards that can be saved to your device's wallet using Google Wallet technology. Each card includes a QR code for verification.
+Generate digital student cards that can be saved to your device's wallet using Google Wallet technology.
 
 ## Features
 
 - 🎓 Web-based form for student information input
 - 📱 Generate Google Wallet passes
-- 🔐 Secure QR code generation for student verification
 - 🎨 Beautiful, responsive UI
 - 🚀 Easy deployment
 
@@ -17,7 +16,6 @@ This application creates **generic passes** for Google Wallet with the following
 - Student ID
 - Course/Program
 - Academic Year
-- QR Code with student ID for verification
 
 ## Setup Instructions
 

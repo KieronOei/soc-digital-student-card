@@ -124,10 +124,6 @@ async function createPassObject(studentData) {
         body: studentData.year,
       },
     ],
-    barcode: {
-      type: 'QR_CODE',
-      value: studentData.studentId,
-    },
   };
 
   try {
