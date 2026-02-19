@@ -14,7 +14,15 @@ const classId = `${issuerId}.student_card_class`;
  * Create Google Wallet credentials
  */
 function getCredentials() {
-  const credentials = require(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+  const fs = require('fs');
+  const path = require('path');
+  const credentialsPath = path.resolve(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+  
+  if (!fs.existsSync(credentialsPath)) {
+    throw new Error(`Credentials file not found at: ${credentialsPath}`);
+  }
+  
+  const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
   return new google.auth.JWT({
     email: credentials.client_email,
     key: credentials.private_key,

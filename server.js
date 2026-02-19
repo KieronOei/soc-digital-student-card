@@ -25,7 +25,14 @@ const classId = `${issuerId}.student_card_class`;
  * Create Google Wallet credentials
  */
 function getCredentials() {
-  const credentials = require(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+  const fs = require('fs');
+  const credentialsPath = path.resolve(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+  
+  if (!fs.existsSync(credentialsPath)) {
+    throw new Error(`Credentials file not found at: ${credentialsPath}`);
+  }
+  
+  const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
   return new google.auth.JWT({
     email: credentials.client_email,
     key: credentials.private_key,
@@ -43,7 +50,11 @@ async function createPassObject(studentData) {
     auth: auth,
   });
 
-  const objectId = `${issuerId}.${studentData.studentId.replace(/[^a-zA-Z0-9]/g, '_')}`;
+  const sanitizedId = studentData.studentId.replace(/[^a-zA-Z0-9]/g, '_');
+  if (!sanitizedId) {
+    throw new Error('Student ID must contain at least one alphanumeric character');
+  }
+  const objectId = `${issuerId}.${sanitizedId}`;
 
   const genericObject = {
     id: objectId,

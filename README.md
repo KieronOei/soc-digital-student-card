@@ -1,6 +1,6 @@
 # Digital Student Card - Wallet Pass Generator
 
-Generate digital student cards that can be saved to your device's wallet using Apple and Google Pay Technology. Works with NFC card readers.
+Generate digital student cards that can be saved to your device's wallet using Google Wallet technology. Each card includes a QR code for verification.
 
 ## Features
 
